@@ -1,0 +1,2 @@
+variable	Difference	lwr	upr	p_adj	Groups
+465	IL1F6	2.89911746045203	0.0901746175840965	5.70806030331996	0.0384593674184558	PL.late.sporadic-PL.late.familial

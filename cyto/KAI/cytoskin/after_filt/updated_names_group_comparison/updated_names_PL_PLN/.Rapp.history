@@ -1,0 +1,88 @@
+setwd("~/Documents/KAI/cytoskin/after_filt/updated_names_group_comparison/updated_names_PL_PLN/")#
+#controlls#
+DataControllsSkin=read.table(file="~/Documents/KAI/cytoskin/after_filt/17112014/removedC024/data.control_newfilt.txt", sep="\t", header=T)#
+###Psofiasis##
+DataPsoriasisSkin=read.table(file="~/Documents/KAI/cytoskin/after_filt/17112014/removedC024/data.psoriasis_newfilt.txt", sep="\t", header=T )      #
+###Vitiliigo##
+DataVitiliigoSkin=read.table(file="~/Documents/KAI/cytoskin/after_filt/17112014/removedC024/data.vitiliigo_newfilt.txt", sep="\t", header=T )
+###PCA plot of the data#
+#
+ctrls=DataControllsSkin#
+rows=as.character(ctrls[,1])#
+cols=colnames(ctrls)[2:43]#
+ctrls <- apply(ctrls[,2:43],2,as.numeric)#
+rownames(ctrls)=rows#
+ctrls=t(ctrls)#
+#
+#PSO#
+pso=t(DataPsoriasisSkin)# psoriasis#
+rows=rownames(pso[2:43,])#
+cols=as.character(pso[1,])#
+ps <- apply(pso[2:43,],2,as.numeric)#
+colnames(ps)=cols#
+rownames(ps)=rows#
+#VIT.#
+vit=t(DataVitiliigoSkin)# vitiliigo#
+rows=rownames(vit[2:43,])#
+cols=as.character(vit[1,])#
+vi <- apply(vit[2:43,],2,as.numeric)#
+colnames(vi)=cols#
+rownames(vi)=rows#
+#
+library(pheatmap)#
+data.all=cbind(ctrls, ps,vi)#
+dim(data.all)#
+summary(data.all)#
+#
+#data.pca=scale(data.all)#
+data.log=log2(data.all)#
+data.pca=data.log#
+library(stringr)#
+colnames(data.pca)=str_replace(colnames(data.pca),"PH","PL")#sick#
+colnames(data.pca)=str_replace(colnames(data.pca),"PT","PNL")#healthy#
+colnames(data.pca)=str_replace(colnames(data.pca),"VH","VL")#sick#
+colnames(data.pca)=str_replace(colnames(data.pca),"VT","VNL")#healthy#
+rownames(data.pca)=gsub("IL8b","CXCL8", rownames(data.pca))#
+save(data.pca, file="data.pca.Rdata")#
+pheatmap(data.pca, cluster_rows = F, cluster_cols = F,scale = "none", main="Gene expression in C, PL, PNL, VL and VNL groups",#
+         filename="data_log_NAs.png")#
+#pheatmap(data.pca, cluster_rows = T, cluster_cols = F,scale = "row",#
+# main="All data scaled, contains NA")
+numNAs <- apply(data.pca1, 1, function(z) sum(is.na(z)))#
+data.pca.new=data.pca1[!(numNAs > 0.5*length(colnames(data.pca1))),]#
+pheatmap(data.pca.new, cluster_rows = F, cluster_cols = F, scale = "row", main="data")#
+dim(data.pca.new)#35 117#
+#remove cols with more than 50% NAs#
+data.pca=t(data.pca.new)#
+numNAs <- apply(data.pca, 1, function(z) sum(is.na(z)))#
+data.pca.new=data.pca[!(numNAs >0.5*length(colnames(data.pca))),]#previously it was 9#
+data.pca=t(data.pca.new)#
+pheatmap(data.pca, cluster_rows = F, cluster_cols = F,scale = "none",main="Gene expression. Rows and columns containing >50% missing values were removed",#
+         filename="data_log_filt_NAs.png")#
+#
+dim(data.pca)#35 117#
+data_log2_filt=data.pca
+data.pca1=data.pca[,! apply( data.pca , 2 , function(x) all(is.na(x)) ) ]#removes columns with complete NAs
+numNAs <- apply(data.pca1, 1, function(z) sum(is.na(z)))#
+data.pca.new=data.pca1[!(numNAs > 0.5*length(colnames(data.pca1))),]#
+pheatmap(data.pca.new, cluster_rows = F, cluster_cols = F, scale = "row", main="data")#
+dim(data.pca.new)#35 117#
+#remove cols with more than 50% NAs#
+data.pca=t(data.pca.new)#
+numNAs <- apply(data.pca, 1, function(z) sum(is.na(z)))#
+data.pca.new=data.pca[!(numNAs >0.5*length(colnames(data.pca))),]#previously it was 9#
+data.pca=t(data.pca.new)
+dim(data.pca)#35 117
+data_log2_filt=data.pca
+#setwd("~/Documents/KAI/cytoskin/after_filt/updated_names_group_comparison")#
+#rownames(data_log2_filt)=gsub("IL8b","CXCL8", rownames(data_log2_filt))#
+#Impute the missing data using k nearest neighbours all data together#
+library(impute)#
+library(RColorBrewer)#
+data=data_log2_filt#
+data.pca.imp=impute.knn(data ,k = 4, rowmax = 0.5, colmax = 0.8, maxp = 1500, rng.seed=36243606)
+data.pca.knn=data.pca.imp
+data.pca.knn=t(data.pca.knn)#
+pca.all=prcomp(data.pca.knn, scale=T, center=T)#, na.action=na.omit)#
+#pca.all=prcomp(~., data=data.pca, scale=T, center=T, na.action=na.omit)#
+summary(pca.all)

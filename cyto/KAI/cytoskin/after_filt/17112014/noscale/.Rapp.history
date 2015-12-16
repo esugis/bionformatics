@@ -1,0 +1,7 @@
+load("/Users/nikolaeva/Documents/KAI/cytoskin/after_filt/updated_names_group_comparison/hc.RData")
+hc
+ls()
+data_hc
+hc.data
+ct
+sort(ct)

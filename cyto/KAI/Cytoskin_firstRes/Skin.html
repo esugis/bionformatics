@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>Skin</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style>
+body { font:80% Verdana,Tahoma,Arial,sans-serif; }
+h1, h2, h3, h4 {  font-family: "Trebuchet MS",Georgia,"Times New Roman",serif; }
+ul.toc { padding: 4px; margin-left: 0; }
+ul.toc li { list-style-type:none; }
+ul.toc li.heading2 { margin-left: 1em; }
+ul.toc li.heading3 { margin-left: 2em; }
+a.wiki-anchor { display: none; margin-left: 6px; text-decoration: none; }
+a.wiki-anchor:hover { color: #aaa !important; text-decoration: none; }
+h1:hover a.wiki-anchor, h2:hover a.wiki-anchor, h3:hover a.wiki-anchor { display: inline; color: #ddd; }
+</style>
+</head>
+<body>
+<a name="Skin"></a>
+<h1 >Skin<a href="#Skin" class="wiki-anchor">&para;</a></h1>
+
+
+	<a name="Data"></a>
+<h2 >Data<a href="#Data" class="wiki-anchor">&para;</a></h2>
+
+
+	<p>There are excel files containing gene expression from RT-PCR. <br />Data is split into 3 groups of expreriments: Controlls(25 healthy people), Psoriasis (35 patients) and Vitiligo(18 patients).<br />Data for psoriasis and vitiligo contains samples from healthy and disease skin.</p>
+
+
+	<a name="Task"></a>
+<h2 >Task<a href="#Task" class="wiki-anchor">&para;</a></h2>
+
+
+Compare the groups and answer the following questions:
+	<ol>
+	<li>How different healthy and diseased skin in psoriasis.</li>
+		<li>How different healthy and diseased skin from psoriasis patients from the controls.</li>
+		<li>How  different healthy and diseased skin in vitiligo.</li>
+		<li>How different healthy and diseased skin from vitiligo patients from the controls.</li>
+		<li>How different are samples from diseased skin in psoriasis and vitiligo.</li>
+		<li>How different are samples from healthy skin in psoriasis and vitiligo.</li>
+		<li>+- How different healthy samples from psoriasis and vitiligo from the controls.</li>
+		<li>+- How different diseased samples from psoriasis and vitiligo from the controls.</li>
+	</ol>
+
+
+	<a name="Analysis-R-scripts"></a>
+<h2 >Analysis. R scripts.<a href="#Analysis-R-scripts" class="wiki-anchor">&para;</a></h2>
+
+
+	<ol>
+	<li>CompareGroupsPVC.R finds differentially expressed genes between general groups(Skin samples only!) without taking to account phenotype and specific subgroups.</li>
+		<li>Specific group comparisons are in phenoLimma.R</li>
+		<li>Metadata is created in the file CreateMetadata.R</li>
+		<li>CT-calculators are processed and new dataset is assembled in CT-files.R Data provided by Pärt's group required more filtering. Reference gene's expression was not always stable. It lead to the errors in expression of the gene of interest.<br />In order to avoid including samples with the corrupted gene expression, the data in each CT calculator was filtered based on < (median(reference gene expression)+3SDT(reference gene expression)). <br />Script also has PCA analysis for all samples.</li>
+	</ol>
+
+
+	<a name="The-following-groups-are-compared"></a>
+<h2 >The following groups are compared:<a href="#The-following-groups-are-compared" class="wiki-anchor">&para;</a></h2>
+
+
+	<p>C - Controls<br />PT- Psoriaas Terve<br />PH- Psoriaas Haige<br />VT- Vitiliigo Terve<br />VH- Vitiliigo Haige</p>
+
+
+	<a name="PCA-for-all-samples"></a>
+<h2 >PCA for all samples:<a href="#PCA-for-all-samples" class="wiki-anchor">&para;</a></h2>
+
+
+	<p><img src="https://biit.cs.ut.ee/redmine/attachments/download/254/PCA_all_samples.png" alt="" /><br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/253/PCA_all_samples.pdf">https://biit.cs.ut.ee/redmine/attachments/download/253/PCA_all_samples.pdf</a>]]</p>
+
+
+	<p>PCA Rdata is available from here:<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/255/pca.all.RData">https://biit.cs.ut.ee/redmine/attachments/download/255/pca.all.RData</a>]]<br />Missing data was removed from the analysis.</p>
+
+
+	<p>From the figure we can conclude that:<br /> 1. PH is clearly separated from Controls and PT, and also from VH and VT. Therefore samples <br /> 2. VH and VT are not separated. There is almost no difference shown between healthy and diseased samples in vitiligo.<br /> 3. Investigation of the differences between the groups is continued in the section "Differential expression analysis".</p>
+
+
+	<a name="Differential-expression-analysis"></a>
+<h2 >Differential expression analysis.<a href="#Differential-expression-analysis" class="wiki-anchor">&para;</a></h2>
+
+
+	<p>For each group the following files are attached:</p>
+
+
+	<ul>
+	<li>Heatmap of the differentially expressed genes.</li>
+		<li>List of up-regulated genes in the compared conditions. </li>
+		<li>List of down-regulated genes in the compared conditions.</li>
+	</ul>
+
+
+	<a name="1-Psoriasis"></a>
+<h2 >1. Psoriasis<a href="#1-Psoriasis" class="wiki-anchor">&para;</a></h2>
+
+
+	<p>1.1 PHvsPT <br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/227/PHvsPT.pdf">https://biit.cs.ut.ee/redmine/attachments/download/227/PHvsPT.pdf</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/236/PHvsPTup.txt">https://biit.cs.ut.ee/redmine/attachments/download/236/PHvsPTup.txt</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/246/PHvsPTdown.txt">https://biit.cs.ut.ee/redmine/attachments/download/246/PHvsPTdown.txt</a>]]</p>
+
+
+	<p>1.2 PHvsC<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/232/PHvsC.pdf">https://biit.cs.ut.ee/redmine/attachments/download/232/PHvsC.pdf</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/248/PHvsCup.txt">https://biit.cs.ut.ee/redmine/attachments/download/248/PHvsCup.txt</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/247/PHvsCdown.txt">https://biit.cs.ut.ee/redmine/attachments/download/247/PHvsCdown.txt</a>]]</p>
+
+
+	<p>1.3 PTvsC<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/233/PTvsC.pdf">https://biit.cs.ut.ee/redmine/attachments/download/233/PTvsC.pdf</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/242/PTvsCup.txt">https://biit.cs.ut.ee/redmine/attachments/download/242/PTvsCup.txt</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/241/PTvsCdown.txt">https://biit.cs.ut.ee/redmine/attachments/download/241/PTvsCdown.txt</a>]]</p>
+
+
+	<a name="2-Vitiligo"></a>
+<h2 >2. Vitiligo<a href="#2-Vitiligo" class="wiki-anchor">&para;</a></h2>
+
+
+	<p>2.1 VHvsVT  No genes were found to be differentially expressed.</p>
+
+
+	<p>2.2 VHvsC<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/235/VHvsC.pdf">https://biit.cs.ut.ee/redmine/attachments/download/235/VHvsC.pdf</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/238/VHvsCup.txt">https://biit.cs.ut.ee/redmine/attachments/download/238/VHvsCup.txt</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/237/VHvsCdown.txt">https://biit.cs.ut.ee/redmine/attachments/download/237/VHvsCdown.txt</a>]]</p>
+
+
+	<p>2.3 VTvsC<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/234/VTvsC.pdf">https://biit.cs.ut.ee/redmine/attachments/download/234/VTvsC.pdf</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/240/VTvsCup.txt">https://biit.cs.ut.ee/redmine/attachments/download/240/VTvsCup.txt</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/239/VTvsCdown.txt">https://biit.cs.ut.ee/redmine/attachments/download/239/VTvsCdown.txt</a>]]</p>
+
+
+	<a name="3-Psoriasis-38-Vitiligo"></a>
+<h2 >3. Psoriasis &#38; Vitiligo<a href="#3-Psoriasis-38-Vitiligo" class="wiki-anchor">&para;</a></h2>
+
+
+	<p>3.1 PHvsVH<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/229/PHvsVH.pdf">https://biit.cs.ut.ee/redmine/attachments/download/229/PHvsVH.pdf</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/249/PHvsVHup.txt">https://biit.cs.ut.ee/redmine/attachments/download/249/PHvsVHup.txt</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/250/PHvsVHdown.txt">https://biit.cs.ut.ee/redmine/attachments/download/250/PHvsVHdown.txt</a>]]</p>
+
+
+	<p>3.2 PTvsVT No genes were found to be differentially expressed.</p>
+
+
+	<p>3.3 PHVH vs PTVT genes from  psoriasis start to prevail on the genes from vitiligo.</p>
+
+
+	<p>3.4 PHVH vs C<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/230/PH_VH_vs_C.pdf">https://biit.cs.ut.ee/redmine/attachments/download/230/PH_VH_vs_C.pdf</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/244/PH_VH_vs_C_up.txt">https://biit.cs.ut.ee/redmine/attachments/download/244/PH_VH_vs_C_up.txt</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/243/PH_VH_vs_C_down.txt">https://biit.cs.ut.ee/redmine/attachments/download/243/PH_VH_vs_C_down.txt</a>]]</p>
+
+
+	<p>3.5 PTVT vs C<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/231/PT_VT_vs_C.pdf">https://biit.cs.ut.ee/redmine/attachments/download/231/PT_VT_vs_C.pdf</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/251/PT_VT_vs_C_up.txt">https://biit.cs.ut.ee/redmine/attachments/download/251/PT_VT_vs_C_up.txt</a>]]<br />[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/245/PT_VT_vs_C_down.txt">https://biit.cs.ut.ee/redmine/attachments/download/245/PT_VT_vs_C_down.txt</a>]]</p>
+
+
+	<a name="Venn-Diagram-of-Differentially-expressed-genes"></a>
+<h2 >Venn Diagram of Differentially expressed genes<a href="#Venn-Diagram-of-Differentially-expressed-genes" class="wiki-anchor">&para;</a></h2>
+
+
+	<p>[[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/252/VennDiagram.pdf">https://biit.cs.ut.ee/redmine/attachments/download/252/VennDiagram.pdf</a>]]</p>
+
+
+	<a name="Analysis-involving-metadata"></a>
+<h2 ><a href="Analysis_involving_metadata.html" class="wiki-page">Analysis involving metadata</a><a href="#Analysis-involving-metadata" class="wiki-anchor">&para;</a></h2>
+</body>
+</html>

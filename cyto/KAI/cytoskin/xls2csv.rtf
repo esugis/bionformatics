@@ -1,0 +1,68 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1348\cocoasubrtf170
+{\fonttbl\f0\fnil\fcharset0 Consolas;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 Monaco;
+}
+{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red0\green0\blue117;\red242\green242\blue242;
+\red11\green84\blue83;\red83\green85\blue2;\red16\green121\blue2;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl336
+
+\f0\fs24 \cf2 \expnd0\expndtw0\kerning0
+sudo easy_install xlsx2csv
+\f1 \cf3 \cb4 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sl360
+\cf3 \
+for\cf0 \expnd0\expndtw0\kerning0
+ i \cf3 \expnd0\expndtw0\kerning0
+in\cf0 \expnd0\expndtw0\kerning0
+ 1 \cf5 \expnd0\expndtw0\kerning0
+2\cf0 \expnd0\expndtw0\kerning0
+ \cf5 \expnd0\expndtw0\kerning0
+3\cf0 \expnd0\expndtw0\kerning0
+ \cf5 \expnd0\expndtw0\kerning0
+4 5 6\cf6 \expnd0\expndtw0\kerning0
+;\cf0 \expnd0\expndtw0\kerning0
+ \cf3 \expnd0\expndtw0\kerning0
+do\cf0 \expnd0\expndtw0\kerning0
+\
+    \cf3 \expnd0\expndtw0\kerning0
+for\cf0 \expnd0\expndtw0\kerning0
+ j \cf3 \expnd0\expndtw0\kerning0
+in\cf0 \expnd0\expndtw0\kerning0
+ $\cf6 \expnd0\expndtw0\kerning0
+(\cf0 \expnd0\expndtw0\kerning0
+ls \cf6 \expnd0\expndtw0\kerning0
+-\cf5 \expnd0\expndtw0\kerning0
+1\cf0 \expnd0\expndtw0\kerning0
+ \cf6 \expnd0\expndtw0\kerning0
+|\cf0 \expnd0\expndtw0\kerning0
+ sed \cf6 \expnd0\expndtw0\kerning0
+-\cf0 \expnd0\expndtw0\kerning0
+e \cf7 \expnd0\expndtw0\kerning0
+'s/\\..*$//'\cf6 \expnd0\expndtw0\kerning0
+);\cf0 \expnd0\expndtw0\kerning0
+ \cf3 \expnd0\expndtw0\kerning0
+do\cf0 \expnd0\expndtw0\kerning0
+\
+    xlsx2csv \cf6 \expnd0\expndtw0\kerning0
+-\cf0 \expnd0\expndtw0\kerning0
+s $i $j\cf6 \expnd0\expndtw0\kerning0
+.\cf0 \expnd0\expndtw0\kerning0
+xlsx \cf6 \expnd0\expndtw0\kerning0
+/
+\f2\fs20 \cf4 \cb0 \kerning1\expnd0\expndtw0 \CocoaLigature0 Users/nikolaeva/Documents/Kai/cytoskin/CT_blood_bact
+\f1\fs24 \cf6 \cb4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 /\cf0 \expnd0\expndtw0\kerning0
+$j\cf6 \expnd0\expndtw0\kerning0
+-\cf0 \expnd0\expndtw0\kerning0
+$i\cf6 \expnd0\expndtw0\kerning0
+.\cf0 \expnd0\expndtw0\kerning0
+csv\
+    \cf3 \expnd0\expndtw0\kerning0
+done\cf0 \expnd0\expndtw0\kerning0
+\
+\cf3 \expnd0\expndtw0\kerning0
+done\cf2 \expnd0\expndtw0\kerning0
+\
+}

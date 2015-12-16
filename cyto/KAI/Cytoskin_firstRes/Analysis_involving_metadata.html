@@ -1,0 +1,481 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>Analysis involving metadata</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style>
+body { font:80% Verdana,Tahoma,Arial,sans-serif; }
+h1, h2, h3, h4 {  font-family: "Trebuchet MS",Georgia,"Times New Roman",serif; }
+ul.toc { padding: 4px; margin-left: 0; }
+ul.toc li { list-style-type:none; }
+ul.toc li.heading2 { margin-left: 1em; }
+ul.toc li.heading3 { margin-left: 2em; }
+a.wiki-anchor { display: none; margin-left: 6px; text-decoration: none; }
+a.wiki-anchor:hover { color: #aaa !important; text-decoration: none; }
+h1:hover a.wiki-anchor, h2:hover a.wiki-anchor, h3:hover a.wiki-anchor { display: inline; color: #ddd; }
+</style>
+</head>
+<body>
+<a name="Analysis-involving-metadata"></a>
+<h1 >Analysis involving metadata<a href="#Analysis-involving-metadata" class="wiki-anchor">&para;</a></h1>
+
+
+	<a name="Groups-for-the-comparisons"></a>
+<h2 >Groups for the comparisons:<a href="#Groups-for-the-comparisons" class="wiki-anchor">&para;</a></h2>
+
+
+	<p>The groups are compared to answer these questions:<br />1. which genes are differentially expressed in each phenotype in diseased vs healthy condition,<br />2. which genes respond differently in two phenotypes</p>
+
+
+	<p>as diff expressed we consider genes with  pval&lt;0.05</p>
+
+
+	<p>1. PASI&lt;10, PASI 10-20, PASI &gt;20</p>
+
+
+<pre>
+       PHvsPTin010      AveExpr         F      P.Value    adj.P.Val
+S100A8   599.76474  35.26414254 31.699621 4.969237e-07 2.087079e-05
+IL1F6   1874.11930  14.79463134 22.305453 1.429600e-05 3.002161e-04
+S100A9   982.77538   0.01340757 20.044220 3.421065e-05 4.789492e-04
+PI3       50.04859          NaN 16.719131 1.301851e-04 1.366944e-03
+FOXP3     62.54758 105.78488546 13.176935 5.853347e-04 4.916812e-03
+CCL2      15.24002  21.30470335  8.919910 4.071889e-03 2.850323e-02
+AIM2      17.35743   9.69153897  8.362277 5.319144e-03 3.191486e-02
+CCL27    -77.06775  21.52385876  7.479763 8.179419e-03 4.068216e-02
+CTLA4     50.16421   0.76571687  7.350738 8.717606e-03 4.068216e-02
+</pre>
+
+	<p>2.    <strong>Age of disease onset &lt;40 yr, &gt;=40 yr</strong></p>
+
+
+	<ul>
+	<li>PHvsPTinYoung=PH.young-PT.young<br /><pre>
+       PHvsPTinyoung      AveExpr         F      P.Value    adj.P.Val
+S100A8   812.4534504   0.89599293 142.05511 1.005837e-17 4.224515e-16
+S100A9  1306.6274547  14.83906336  98.71439 1.799653e-14 3.779272e-13
+PI3       70.7911256  17.93720384  86.70733 2.065191e-13 2.891267e-12
+IL1F6   1812.5822915   0.01340757  67.85545 1.473698e-11 1.547383e-10
+CCL27   -128.5246821  21.30470335  56.52845 2.626903e-10 2.206599e-09
+FOXP3     42.0501378 105.78488546  21.13292 2.143761e-05 1.500633e-04
+LCN2       0.1691676  45.37853921  20.51393 2.730752e-05 1.638451e-04
+IL26       6.0209818  27.07800242  19.78226 3.645029e-05 1.913640e-04
+CCL2      11.3845602   9.69153897  15.49667 2.108331e-04 9.838879e-04
+IL8b       0.1929954   3.48180413  11.55219 1.203973e-03 5.056687e-03
+</pre></li>
+		<li>PHvsPTinOld=PH.old-PT.old<br /><pre>
+              PHvsPTinold     AveExpr        F      P.Value    adj.P.Val
+S100A8   915.7619324  0.56928581 67.67937 1.538106e-11 6.460045e-10
+IL1F6   2425.7279144 27.07800242 45.57269 5.658575e-09 1.084205e-07
+S100A9  1432.8241754  1.69073895 44.51373 7.744322e-09 1.084205e-07
+PI3       80.0274565  1.15422508 41.55349 1.894858e-08 1.989601e-07
+IL26      12.3318523  0.89599293 31.11925 5.588251e-07 4.694131e-06
+FOXP3     81.4544490 14.79463134 29.73621 9.019893e-07 6.313925e-06
+IL22RA1   21.5826287 17.93720384 28.57462 1.356673e-06 8.140039e-06
+IFNGR      0.9755615  0.01340757 24.21349 6.622154e-06 3.476631e-05
+IFIH1     25.7135583         NaN 22.91189 1.081450e-05 5.046765e-05
+CCL27   -132.5437309 21.52385876 22.54466 1.243855e-05 5.224191e-05
+</pre></li>
+	</ul>
+
+
+	<ul>
+	<li>Difold_young =(PH.old-PT.old)-(PH.young-PT.young) <br /><pre>
+        Difold_young   AveExpr         F      P.Value  adj.P.Val
+IL22RA1    16.519608 21.523859 12.174989 0.0008945397 0.02371349
+IFIH1      21.507048  9.691539 11.657235 0.0011292139 0.02371349
+IFNGR       0.718249 21.304703  9.545432 0.0029930741 0.04190304
+</pre><br />3.    Duration of psoriasis &lt;5yr, 5-15yr, &gt;15yr<br />4.    Nail involvment</li>
+	</ul>
+
+
+	<ul>
+	<li>PHvsPTinNO=PH.no-PT.no<br /><pre>
+       PHvsPTinNO     AveExpr         F      P.Value    adj.P.Val
+S100A8   911.6825   0.7657169 67.585898 1.573199e-11 6.607438e-10
+S100A9  1282.9677 105.7848855 33.295342 2.671376e-07 5.609890e-06
+PI3       64.8429  21.5238588 24.522803 5.900534e-06 8.260747e-05
+CCL27   -106.9193   9.6915390 13.278952 5.482866e-04 5.757009e-03
+IL1F6   1097.7748  21.3047033  8.991262 3.893127e-03 3.270227e-02
+</pre></li>
+	</ul>
+
+
+	<ul>
+	<li>PHvsPTinYES=PH.yes-PT.yes<br /><pre>
+        PHvsPTinYES      AveExpr         F      P.Value    adj.P.Val
+S100A8  817.8912063    7.7654150 169.98474 1.809080e-19 7.598138e-18
+IL1F6  2262.0531088    0.8959929 119.30256 4.092333e-16 8.593899e-15
+S100A9 1359.6293915   18.8128644 116.85388 6.269346e-16 8.777085e-15
+PI3      76.0196366   97.7777108 105.32873 5.070432e-15 5.323953e-14
+CCL27  -136.8852532    0.7657169  68.01657 1.416954e-11 1.190241e-10
+FOXP3    65.6931850   35.2641425  57.81948 1.865202e-10 1.305641e-09
+IL26      9.2715060    1.6907389  42.03802 1.633586e-08 9.801513e-08
+LCN2      0.2059296 1199.1821545  31.87661 4.313154e-07 2.264406e-06
+CTLA4    49.0885515   14.7946313  27.42994 2.039794e-06 9.519037e-06
+CCL2     14.0433715   21.5238588  23.37092 9.087711e-06 3.816839e-05
+</pre></li>
+	</ul>
+
+
+	<ul>
+	<li>Difyes_no =(PH.yes-PT.yes)-(PH.no-PT.no)- no genes behave differently</li>
+	</ul>
+
+
+	<p>5.    <strong>Psoriatic arthritis</strong></p>
+
+
+	<ul>
+	<li>PHvsPTinNO=PH.no-PT.no<br /><pre>
+         PHvsPTinNO      AveExpr         F      P.Value    adj.P.Val
+S100A8  810.0380642  14.83906336 138.28521 1.803917e-17 7.576451e-16
+S100A9 1302.2340509   1.15422508  96.03219 3.053033e-14 6.411369e-13
+PI3      70.6018825  17.93720384  84.43945 3.348132e-13 4.687385e-12
+IL1F6  1804.5186726   0.01340757  65.86115 2.400542e-11 2.520569e-10
+CCL27  -129.8099798  21.30470335  56.54436 2.615588e-10 2.197094e-09
+FOXP3    42.5209063 105.78488546  21.18581 2.100051e-05 1.470035e-04
+IL26      6.1016356  27.07800242  19.93525 3.430533e-05 1.869160e-04
+LCN2      0.1684011  45.37853921  19.84152 3.560305e-05 1.869160e-04
+CCL2     11.3392912   9.69153897  14.99230 2.612164e-04 1.219010e-03
+CTLA4    31.5005172  21.52385876  11.36429 1.289599e-03 5.293176e-03
+</pre></li>
+	</ul>
+
+
+	<ul>
+	<li>PHvsPTinYES=PH.yes-PT.yes<br /><pre>
+S100A8   919.571330  0.5692858 71.87592 5.636814e-12 2.367462e-10
+IL1F6   2438.601710  3.4818041 48.51053 2.408841e-09 4.942495e-08
+S100A9  1437.342385  1.6907389 47.18532 3.530354e-09 4.942495e-08
+PI3       80.261896  0.9931512 44.01284 8.993174e-09 9.442833e-08
+IL26      12.355200 14.8390634 32.96677 2.982888e-07 2.505626e-06
+FOXP3     81.054861        NaN 31.04888 5.724811e-07 4.007368e-06
+IL22RA1   21.409106  0.8959929 29.61311 9.415833e-07 5.649500e-06
+IFNGR      0.984862 14.8390634 25.97683 3.451998e-06 1.812299e-05
+IFIH1     25.924001 35.2641425 24.51469 5.918499e-06 2.761966e-05
+CCL27   -130.180181  0.7657169 22.93562 1.071720e-05 4.501225e-05
+</pre></li>
+	</ul>
+
+
+	<ul>
+	<li>Difyes_no =(PH.yes-PT.yes)-(PH.no-PT.no)<br /><pre>
+         Difyes_no   AveExpr         F      P.Value  adj.P.Val
+IFIH1   21.6318108  9.691539 12.163314 0.0008992230 0.01894283
+IL22RA1 16.2493447 21.523859 12.156332 0.0009020395 0.01894283
+IFNGR    0.7230716 21.304703  9.977965 0.0024430403 0.03420256
+</pre></li>
+	</ul>
+
+
+	<p>6.    <strong>Psoriasis in family</strong></p>
+
+
+	<ul>
+	<li>PHvsPTinNO=PH.no-PT.no<br /><pre>
+         PHvsPTinNO     AveExpr          F      P.Value    adj.P.Val
+S100A8  841.7077724 95.56171010 114.131744 1.014392e-15 4.260445e-14
+S100A9 1281.3705221 27.07800242  71.441053 6.244846e-12 1.311418e-10
+PI3      68.3870987  0.01340757  60.872558 8.426317e-11 1.179684e-09
+CCL27  -137.0505399 21.30470335  49.629511 1.750717e-09 1.838252e-08
+IL1F6  1581.4873582 14.79463134  41.831914 1.739797e-08 1.461430e-07
+LCN2      0.1514803 35.26414254  12.559076 7.536260e-04 5.275382e-03
+IL26      4.4301193         NaN   8.787804 4.291140e-03 2.353716e-02
+FOXP3    26.2432856  0.76571687   8.502251 4.923050e-03 2.353716e-02
+PYCARD   34.4682417 14.83906336   8.452128 5.043677e-03 2.353716e-02
+CCL2      9.1957721  9.69153897   7.911333 6.561019e-03 2.755628e-02
+</pre></li>
+	</ul>
+
+
+	<ul>
+	<li>PHvsPTinYES=PH.yes-PT.yes<br /><pre>
+        PHvsPTinYES      AveExpr        F      P.Value    adj.P.Val
+S100A8  839.3333533 1.199182e+03 94.57394 4.084918e-14 1.715666e-12
+IL1F6  2457.7835852 1.793720e+01 84.19423 3.529065e-13 7.411037e-12
+FOXP3    84.6609472 3.526414e+01 73.73650 3.649077e-12 5.108708e-11
+S100A9 1412.6538063 9.777771e+01 72.35835 5.032555e-12 5.284183e-11
+PI3      79.2177564 6.165292e-01 68.06706 1.399736e-11 1.175778e-10
+CTLA4    70.0030351 1.479463e+01 59.69010 1.143500e-10 8.004500e-10
+IL26     11.7165391 9.931512e-01 51.22323 1.117678e-09 6.706068e-09
+CCL27  -120.7050820 7.657169e-01 32.08103 4.023562e-07 2.112370e-06
+IFIH1    21.3644199 1.340757e-02 25.87536 3.582396e-06 1.671785e-05
+LCN2      0.2145761 1.690739e+00 21.00037 2.257328e-05 8.217254e-05
+</pre></li>
+	</ul>
+
+
+	<ul>
+	<li>Difyes_no =(PH.yes-PT.yes)-(PH.no-PT.no)<br /><pre>
+       Difyes_no    AveExpr        F      P.Value    adj.P.Val
+CTLA4  57.30005  9.6915390 21.81409 1.646379e-05 0.0006914791
+FOXP3  58.41766 21.3047033 19.14975 4.689906e-05 0.0009848803
+IFIH1  20.70264 21.5238588 13.25300 5.545714e-04 0.0077639999
+IL26    7.28642  0.7657169 10.80576 1.664674e-03 0.0174790756
+</pre></li>
+	</ul>
+
+
+	<p>7.    Skin phototype<br />Only psoriasis data was used for testing(PH and PT). <br />Test were made to see the difference between gene expression in phototype I, II, III in diseased and healthy skin.</p>
+
+
+	<ul>
+	<li>PHvsPTinI=PH.I-PT.I<br /><pre>
+       PHvsPTinI   AveExpr        F      P.Value   adj.P.Val
+S100A8 1428.9134 21.304703 19.73272 3.866616e-05 0.001469314
+PI3     124.5208  9.691539 11.35948 1.313413e-03 0.024954856
+</pre></li>
+	</ul>
+
+
+	<ul>
+	<li>PHvsPTinII=PH.II=PT.II<br /><pre>
+           PHvsPTinII      AveExpr         F      P.Value    adj.P.Val
+S100A8   763.2741356  27.07800242 75.905610 2.875840e-12 1.092819e-10
+S100A9  1322.4800071   3.48180413 55.397322 4.243075e-10 7.921406e-09
+PI3       73.8173399  14.83906336 53.818177 6.468519e-10 7.921406e-09
+IL1F6   2192.1560302 105.78488546 52.878019 8.338322e-10 7.921406e-09
+CCL27   -134.5925620  21.30470335 33.701302 2.549402e-07 1.937546e-06
+FOXP3     51.7788172  21.52385876 14.711059 3.019313e-04 1.912232e-03
+IL1RN     76.3429005  14.79463134 13.585048 4.899780e-04 2.567590e-03
+LCN2       0.1900769   0.01340757 13.359279 5.405453e-04 2.567590e-03
+IL22RA1   12.9453147          NaN 11.369507 1.307469e-03 5.520424e-03
+IL26       6.2854267  35.26414254  9.056899 3.815202e-03 1.449777e-02
+</pre></li>
+	</ul>
+
+
+	<ul>
+	<li>PHvsPTinIII=PH.III-PT.III<br /><pre>
+        PHvsPTinIII    AveExpr         F      P.Value    adj.P.Val
+S100A8  868.4062336  0.8959929 134.73344 5.137214e-17 1.952141e-15
+S100A9 1330.2127427 14.8390634  76.85454 2.326384e-12 4.420129e-11
+PI3      70.2293468 17.9372038  66.79842 2.384610e-11 3.020506e-10
+IL1F6  1866.5392418 14.8390634  52.56822 9.070347e-10 8.616829e-09
+CCL27  -125.7338649 21.5238588  40.32978 3.101114e-08 2.356846e-07
+IL26      9.1521871 27.0780024  26.33155 3.225986e-06 2.043124e-05
+FOXP3    56.0186009 14.7946313  23.61136 8.744001e-06 4.746743e-05
+CCL2     15.2499558 21.3047033  20.48338 2.881514e-05 1.368719e-04
+IL8b      0.2562819  3.4818041  16.82531 1.287112e-04 5.434475e-04
+LCN2      0.1754805 45.3785392  15.61344 2.061840e-04 7.834992e-04
+</pre></li>
+		<li>Difference between I and II</li>
+		<li>Difference between I and III</li>
+		<li>Difference between II and III<br />  DifII_I =(PH.II-PT.II)-(PH.I-PT.I),<br />  DifIII_II=(PH.III-PT.III)-(PH.II-PT.II),<br />  DiffIII_I=(PH.III-PT.III)-(PH.I-PT.I),<br /> No genes that respond differently in 3 groups.</li>
+	</ul>
+
+
+	<p>According to the test results there is no evidence of skin photo type being involved.</p>
+
+
+	<p>8.    <strong>Age of disease onset &lt;40 yr, ?40 yr; psoriasis in family</strong></p>
+
+
+	<ul>
+	<li>PHvsPTinno.young=PH.no.young-PT.no.young</li>
+	</ul>
+
+
+<pre>
+       PHvsPTin.no.young     AveExpr         F      P.Value    adj.P.Val
+S100A8         873.37554 105.7848855 88.852564 2.493164e-13 9.972658e-12
+S100A9        1308.11575  14.7946313 51.955914 1.270233e-09 2.540466e-08
+PI3             70.18910  21.5238588 45.638011 7.338218e-09 9.784291e-08
+CCL27         -147.72948   9.6915390 41.273040 2.633920e-08 2.633920e-07
+IL1F6         1472.25476  21.3047033 25.164490 5.234827e-06 4.187862e-05
+PYCARD          36.19719   0.7657169  7.723933 7.320460e-03 4.880307e-02
+</pre>
+
+	<ul>
+	<li>PHvsPTin.no.old=PH.no.old-PT.no.old</li>
+	</ul>
+
+
+<pre>
+       PHvsPTin.no.old     AveExpr         F      P.Value    adj.P.Val
+S100A8     759.3715817 105.7848855 25.834690 4.111692e-06 0.0001644677
+S100A9    1211.8329233  14.7946313 17.149631 1.127802e-04 0.0022556047
+IL1F6     1865.4921079  21.3047033 15.539451 2.188292e-04 0.0029177230
+PI3         63.7019064   0.7657169 14.458356 3.449435e-04 0.0034494350
+CCL27     -109.2852832   9.6915390  8.687246 4.600536e-03 0.0368042902
+LCN2         0.2344505  21.5238588  8.106608 6.078897e-03 0.0405259791
+</pre>
+
+	<ul>
+	<li>PHvsPTin.yes.young=PH.yes.young-PT.yes.young</li>
+	</ul>
+
+
+<pre>
+       PHvsPTin.yes.young     AveExpr        F      P.Value    adj.P.Val
+S100A8          801.18462   0.9931512 63.26776 7.024032e-11 2.809613e-09
+IL1F6          2329.34280  27.0780024 53.30137 8.861915e-10 1.374740e-08
+CTLA4            76.45757 105.7848855 52.73349 1.031055e-09 1.374740e-08
+S100A9         1372.58982   0.5692858 48.40314 3.360891e-09 2.755774e-08
+FOXP3            82.36421         NaN 48.31474 3.444718e-09 2.755774e-08
+PI3              73.32083   1.1542251 42.13970 2.034247e-08 1.356165e-07
+IL26             11.29778  17.9372038 32.82074 3.734254e-07 2.133859e-06
+CCL27          -110.88266  21.5238588 19.67473 4.123311e-05 2.061656e-04
+AIM2             19.25541   9.6915390 18.15406 7.522708e-05 3.343426e-04
+CCL2             16.71406  21.3047033 15.11993 2.608380e-04 1.043352e-03
+</pre>
+
+	<ul>
+	<li>PHvsPTin.yes.old=PH.yes.old-PT.yes.old</li>
+	</ul>
+
+
+<pre>
+        PHvsPTin.yes.old     AveExpr        F      P.Value    adj.P.Val
+IL22RA1         32.03190  0.01340757 35.44221 1.597011e-07 6.388044e-06
+S100A8         944.24238 45.37853921 31.95594 4.970439e-07 9.940879e-06
+IL1RN          172.57377 35.26414254 29.38423 1.184185e-06 1.578914e-05
+IL1F6         2810.99574         NaN 28.22664 1.766257e-06 1.766257e-05
+PI3             95.43432 27.07800242 25.96051 3.930372e-06 3.144298e-05
+S100A9        1522.82976 17.93720384 21.66516 1.915238e-05 1.194339e-04
+FOXP3           90.97699 21.52385876 21.43547 2.090094e-05 1.194339e-04
+IFIH1           33.25386  0.76571687 19.16910 5.028133e-05 2.514066e-04
+IL26            12.86812 14.83906336 15.48317 2.240300e-04 9.956889e-04
+CCL27         -147.71673  9.69153897 12.69720 7.376036e-04 2.950414e-03
+</pre>
+
+	<ul>
+	<li>No psoriasis in the family.  Dif.no.old_young =(PH.no.old-PT.no.old)-(PH.no.young-PT.no.young)<br />No diff. expressed genes between the groups.</li>
+		<li>Psoriasis in the family history. Dif.yes.old_young =(PH.yes.old-PT.yes.old)-(PH.yes.young-PT.yes.young)</li>
+	</ul>
+
+
+<pre>
+        Dif.yes.old_young   AveExpr        F      P.Value  adj.P.Val
+IL22RA1          22.47368 21.304703 12.79396 0.0007069907 0.02827963
+IL1RN           121.12441  9.691539 10.61523 0.0018721144 0.03744229
+</pre>
+
+	<p>9.    <strong>Age of disease onset &lt;40 yr, ?40 yr; PASI</strong></p>
+
+
+	<ul>
+	<li> PHvsPTin010young=PH.0_10.young-PT.0_10.young</li>
+	</ul>
+
+
+<pre>
+       PHvsPTin010young    AveExpr         F      P.Value    adj.P.Val
+S100A8       1093.08747 21.5238588 63.170574 1.145571e-10 4.467725e-09
+S100A9       1550.12993  0.7657169 28.479184 1.895717e-06 3.696649e-05
+PI3            85.82393 21.3047033 25.918488 4.579317e-06 5.953112e-05
+CCL27        -105.16745  9.6915390  8.878642 4.307079e-03 4.199402e-02
+</pre>
+
+	<ul>
+	<li>PHvsPTin010old=PH.0_10.old-PT.0_10.old</li>
+	</ul>
+
+
+<pre>
+       PHvsPTin010old  AveExpr        F     P.Value adj.P.Val
+S100A8       609.3409 9.691539 11.77815 0.001152564   0.04495
+</pre>
+
+	<ul>
+	<li>PHvsPTin1020young=PH.10_20.young-PT.10_20.young</li>
+	</ul>
+
+
+<pre>
+       PHvsPTin1020young     AveExpr         F      P.Value    adj.P.Val
+S100A8       785.7279858         NaN 65.279892 7.014343e-11 2.735594e-09
+CCL27       -161.1555100   9.6915390 41.696940 3.046515e-08 5.940705e-07
+S100A9      1280.0927694  35.2641425 38.842236 7.048632e-08 9.163221e-07
+PI3           71.2224570  14.7946313 35.699057 1.832639e-07 1.786823e-06
+IL1F6       1968.4573941  21.5238588 34.879713 2.364674e-07 1.844446e-06
+LCN2           0.1929598 105.7848855 11.387479 1.370043e-03 8.905281e-03
+FOXP3         37.2415418  21.3047033  8.937718 4.189272e-03 2.334023e-02
+IL26           5.6039564   0.7657169  7.634816 7.797496e-03 3.801279e-02
+</pre>
+
+	<ul>
+	<li>PHvsPTin1020old=PH.10_20.old-PT.10_20.old</li>
+	</ul>
+
+
+<pre>
+       PHvsPTin1020old     AveExpr         F      P.Value   adj.P.Val
+IL1F6       2604.25596   0.7657169 18.315107 7.647722e-05 0.002212377
+FOXP3         94.64407  21.5238588 17.317268 1.134552e-04 0.002212377
+S100A9      1474.13359         NaN 15.453123 2.413075e-04 0.003136997
+S100A8       664.13161  14.7946313 13.991508 4.437141e-04 0.004326212
+CTLA4         69.61406  21.3047033 12.826992 7.294720e-04 0.005689882
+PI3           76.30999 105.7848855 12.294387 9.191183e-04 0.005974269
+CCL27       -129.82724   9.6915390  8.118331 6.176938e-03 0.034414370
+</pre>
+
+	<ul>
+	<li>PHvsPTin20Infyoung=PH.20_Inf.young-PT.20_Inf.young</li>
+	</ul>
+
+
+<pre>
+        PHvsPTin20Infyoung     AveExpr        F      P.Value    adj.P.Val
+S100A8           878.84956   0.9931512 73.50326 1.123750e-11 4.382624e-10
+CTLA4             81.37172 105.7848855 52.57741 1.556196e-09 3.034582e-08
+IL1F6           2307.08451  27.0780024 43.12115 2.024311e-08 2.631604e-07
+FOXP3             82.98732         NaN 39.94269 5.085105e-08 4.957978e-07
+S100A9          1346.91890   0.5692858 38.70319 7.347642e-08 5.731161e-07
+PI3               76.52512   1.1542251 37.09141 1.195075e-07 7.767987e-07
+IL26              12.73347  17.9372038 35.47684 1.963328e-07 1.093854e-06
+IL22RA1           12.22396  45.3785392 20.29054 3.567526e-05 1.739169e-04
+AIM2              20.13641   9.6915390 15.51045 2.356866e-04 1.021308e-03
+CCL27           -101.32995   0.7657169 14.83652 3.114035e-04 1.214474e-03
+</pre>
+
+	<ul>
+	<li>PHvsPTin20Infold=PH.20_Inf.old-PT.20_Inf.old</li>
+	</ul>
+
+
+<pre>
+        PHvsPTin20Infold     AveExpr         F      P.Value    adj.P.Val
+IL22RA1         40.55731  14.7946313 74.453698 9.165151e-12 3.574409e-10
+IL1RN          192.58674 105.7848855 32.531755 4.978244e-07 9.707577e-06
+S100A8         895.98649  14.8390634 25.465908 5.368924e-06 6.979601e-05
+IL1F6         2763.40844   0.7657169 20.622071 3.146132e-05 3.067479e-04
+IFIH1           36.99787  21.5238588 18.284876 7.738930e-05 6.036365e-04
+PI3             90.20344  35.2641425 17.178701 1.199041e-04 7.036180e-04
+S100A9        1548.37874  95.5617101 17.048925 1.262904e-04 7.036180e-04
+CCL27         -169.70833   9.6915390 13.872075 4.666920e-04 2.275124e-03
+FOXP3           79.69872  21.3047033 12.279913 9.249401e-04 4.008074e-03
+IL26            11.55264         NaN  9.734036 2.893479e-03 1.128457e-02
+</pre>
+
+	<ul>
+	<li>Dif.0_10 =(PH.0_10.old-PT.0_10.old)-(PH.0_10.young-PT.0_10.young),<br />  Dif.10_20=(PH.10_20.old-PT.10_20.old)-(PH.10_20.young-PT.10_20.young),<br />  Diff.20_Inf=(PH.20_Inf.old-PT.20_Inf.old)-(PH.20_Inf.young-PT.20_Inf.young)</li>
+	</ul>
+
+
+<pre>
+        Dif.0_10 Dif.10_20 Diff.20_Inf  AveExpr        F      P.Value   adj.P.Val
+IL22RA1 4.720022 -5.654369    28.33334 9.691539 9.665288 3.264986e-05 0.001273344
+</pre>
+
+	<p>10.    Age of disease onset &lt;40 yr, ?40 yr; nail involvment<br />11.    Age of disease onset &lt;40 yr, ?40 yr; psoriatic arthritis<br />12.    Age of disease onset &lt;40 yr, ?40 yr; psoriasis in family; PASI<br />13.    Age of disease onset &lt;40 yr, ?40 yr; psoriasis in family; nail involvment<br />14.    Age of disease onset &lt;40 yr, ?40 yr; psoriasis in family; psoriatic arthritis<br />15.    Age of disease onset &lt;40 yr, ?40 yr; psoriasis in family; PASI; nail involvment<br />16.    Age of disease onset &lt;40 yr, ?40 yr; psoriasis in family; PASI; psoriatic arthritis<br />17.    Psoriasis in family; PASI<br />18.    Psoriasis in family; nail involvment<br />19.    Psoriasis in family; psoriatic arthritis<br />20.    Psoriasis in family; PASI; nail involvment<br />21.    Psoriasis in family; PASI; psoriatic arthritis<br />22.    PASI; nail involvment<br />23.    PASI; psoriatic arthritis</p>
+
+
+	<a name="Analysis"></a>
+<h2 >Analysis<a href="#Analysis" class="wiki-anchor">&para;</a></h2>
+
+
+	<p>Analysis is in  phenoLimma.R</p>
+
+
+	<p>1. Multifactorial analysis using limma<br />2. Draw violin plots for the interesting resulting genes.</p>
+
+
+	<a name="Violin-plots-for-Skin-Phototypes-using-all-data"></a>
+<h2 >Violin plots for Skin Phototypes using all data.<a href="#Violin-plots-for-Skin-Phototypes-using-all-data" class="wiki-anchor">&para;</a></h2>
+
+
+	<p><img src="https://biit.cs.ut.ee/redmine/attachments/download/257/Vioplots_skinphototype.png" alt="" /><br />pdf [[<a class="external" href="https://biit.cs.ut.ee/redmine/attachments/download/256/ViolinPlots_skinPhototypes.pdf">https://biit.cs.ut.ee/redmine/attachments/download/256/ViolinPlots_skinPhototypes.pdf</a>]]</p>
+</body>
+</html>
