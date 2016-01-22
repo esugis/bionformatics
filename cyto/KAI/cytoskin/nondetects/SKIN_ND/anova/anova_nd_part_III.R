@@ -94,7 +94,8 @@ dt.merged=merge(ann,dt,by="sample",all=T)
 dt.merged.melt=melt(dt.merged)
 colnames(dt.merged.melt)[7]="expression"
 tmp <- subset(dt.merged.melt,variable%in%selected_genes)
-
+#lm3 <- lm(data=tmp, expression ~ Age_of_disease_onset + Psoriasis_in_family )
+##sum(lm3$coefficients)
 #make anova + turkey test
 ### ANOVA part on the selected genes ##############################
 #Aov example for many genes

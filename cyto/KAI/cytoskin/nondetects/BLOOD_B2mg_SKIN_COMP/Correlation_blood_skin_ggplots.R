@@ -158,8 +158,8 @@ for (i in 1:length(genes)){
   rownames(DF)=c("PL", "SEB","PMA", "72h")
   #cor(t(DF),method="spearman",use="pairwise.complete.obs")
   #print(DF)
-  CR=corr.test(t(DF), method="spearman",adjust ="fdr") 
-  #CR=corr.test(t(DF), method="pearson",adjust ="fdr")
+ # CR=corr.test(t(DF), method="spearman",adjust ="fdr") 
+  CR=corr.test(t(DF), method="pearson",adjust ="fdr")
   adj.pval=to.upper(CR$p)
   cor.gene=cbind(CR$ci, adj.pval)
   cor.gene=cbind(cor.gene,gene=replicate(length(rownames(cor.gene)),g))
@@ -177,23 +177,22 @@ groups=as.character(correlations$groups)
 cc <- strsplit(groups,'-')
 part1 <- unlist(cc)[2*(1:length(groups))-1]
 corpl=cbind(part1, correlations)
-correlations_pl=corpl[corpl$part1%in%"PL",]
-#save(correlations, file="correlations_skin_blood.RData")
-#write.table(file="correlations.txt",correlations, sep="\t", quote=F ) 
-correlations=correlations[complete.cases(correlations),]
-correlations.adj.pval.sign= correlations[correlations$adj.pval<=0.05, ]#11,7
-dim(correlations.adj.pval.sign)
-#save(correlations.adj.pval.sign, file="correlations.adj.pval.sign.RData")
-#write.table(file="correlations_adj_pval_sign.txt",correlations.adj.pval.sign, sep="\t", quote=F ) 
+correlations_pl=corpl[corpl$part1%in%"PL",c(-1)]
+save(correlations_pl, file="correlations_skin_blood_pl.RData")
+write.table(file="correlations_pl.txt",correlations_pl, sep="\t", quote=F ) 
+correlations_pl=correlations_pl[complete.cases(correlations_pl),]
+correlations.adj.pval.sign_pl= correlations_pl[correlations_pl$adj.pval<=0.05, ]#11,7
+dim(correlations.adj.pval.sign_pl)
+save(correlations.adj.pval.sign_pl, file="correlations.adj.pval.sign_pl.RData")
+write.table(file="correlations_adj_pval_sign_pl.txt",correlations.adj.pval.sign_pl, sep="\t", quote=F ) 
 #correlations.adj.pval.sign
 #correlations.p.sign=correlations[correlations$p<=0.05, ]#14,7
 
 #plot results only for the significant correlation results
 #1 select th genes and corresponding groups from the signif cor
 
-genes.sign=unique(as.character(correlations.adj.pval.sign$gene))
-#[1] "AIM2"  "CTLA4" "EOMES" "FOXP3" "IFIH1" "IL22" 
-
+genes.sign=unique(as.character(correlations.adj.pval.sign_pl$gene))
+#"CTLA4" 
 skin_blood_group=cbind(skin_blood_group,gene=rownames(skin_blood_group))
 skin_blood_group=data.frame(skin_blood_group)
 skin_blood_group=skin_blood_group[skin_blood_group$gene%in%genes.sign,]
