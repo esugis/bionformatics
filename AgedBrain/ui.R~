@@ -1,0 +1,61 @@
+library(shiny) 
+#hyb=head(read.csv(file="/home/nikolaeva/AgedBrain/ppi2_data/hybrigenics.csv",head=TRUE,sep=","))
+#colnames(hyb)=c("Protein1","Interaction","Protein2");
+#lit= head(read.csv(file="/home/nikolaeva/AgedBrain/ppi2_data/literature.csv",head=FALSE,sep=",")) 
+#colnames(lit)=c("Protein1", "Interaction","Protein2");
+#PPI=hyb
+#PPI=head(read.table(file="/home/nikolaeva/AgedBrain/ppi2_data/ppi2_affy44_ver1.txt",head=TRUE,sep="\t"))
+#links=read.table(file="/group/inbox/nikolaeva/ppi2_mem_calc.txt", header=TRUE, sep="\t")
+#links=links[1:50,]
+
+shinyUI(bootstrapPage(
+#shinyUI(pageWithSidebar(
+#includeScript('www/test.js'),
+
+  headerPanel('Data Tables',
+       tags$head(
+      # tags$script(src='http://datatables.net/release-datatables/media/js/jquery.dataTables.js'),
+      #  tags$script(src='showrow.js'),
+     #	tags$script(src='test.js'),
+     	 tags$script(src='dTable.js'),
+         tags$link(rel='stylesheet', type='text/css', href='dTable.css')
+       )  
+  ),
+
+# sidebarPanel(
+   # checkboxGroupInput('show_vars', 'Columns n PPI to show:', names(PPI),
+#                       selected = names(PPI)),
+#checkboxGroupInput('show_vars', 'Columns n PPI to show:', names(links),
+#                       selected = names(links)),   
+#helpText('For the PPI data, we can select variables to show in the table;
+#             for the literature network  example, we use bSortClasses = TRUE so that sorted
+#             columns are colored since they have special CSS classes attached;
+#             for the Hybrigenics network, we customize the length menu so we can display 5
+#             rows per page.')
+#  ),
+
+
+ mainPanel(
+    tabsetPanel(
+#     tabPanel("Plot", plotOutput("plot")), 
+  #    tabPanel('PPI',
+   #            dataTableOutput("table1")),
+#      tabPanel('PPI from literature',
+  #             dataTableOutput("table2")),
+ #     tabPanel('PPI from Hybrigenics',
+   #            dataTableOutput("table3")),
+     # tabPanel('MEM results',
+     #          dataTableOutput("table4")),
+      tabPanel('MEM',
+               dataTableOutput("table6")),
+      tabPanel('MEM self interacting PPI',
+               dataTableOutput("table5")),
+      tabPanel('Epistatic interactions',
+               dataTableOutput("table7")),
+      tabPanel('Help',
+               dataTableOutput("help"))
+   )
+  )#,
+#includeScript('www/testL.js')
+#includeScript('www/test.js')
+))
